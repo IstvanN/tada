@@ -3,5 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Everything working!")
+	printHeader()
+}
+
+func printHeader() {
+	fmt.Println(
+		`
+Command Line Todo application
+=============================
+
+`)
 }
