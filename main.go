@@ -6,10 +6,13 @@ import (
 	"os"
 )
 
+const datafile = "data/data.csv"
+
 func main() {
 	parseFlags()
 	if lFlag {
-		fmt.Println("gonna list all")
+		tasks := readTasksFromFile(datafile)
+		listTasks(tasks)
 		return
 	}
 }
