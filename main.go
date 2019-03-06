@@ -9,13 +9,21 @@ import (
 const datafile = "data/data.csv"
 
 var tasks []task
+var t task
 
 func main() {
-	parseFlags()
 	printHeader()
+	parseFlags()
+	tasks = readTasksFromFile(datafile)
 	if lFlag {
-		tasks = readTasksFromFile(datafile)
 		listTasks(tasks)
+		return
+	}
+	if aFlag != "" {
+		t = newTask(aFlag)
+		tasks = append(tasks, t)
+		writeTasksToFile(tasks, datafile)
+		fmt.Printf("'%v' has been added to your todos!", t.descr)
 		return
 	}
 
