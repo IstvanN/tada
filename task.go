@@ -12,8 +12,8 @@ type task struct {
 	done  bool
 }
 
-func newTask(descr string) *task {
-	t := &task{
+func newTask(descr string) task {
+	t := task{
 		descr: descr,
 		done:  false,
 	}
@@ -41,7 +41,7 @@ func convertBytesToTasks(b []byte) []task {
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
 		t := newTask(expr)
-		tasks = append(tasks, *t)
+		tasks = append(tasks, t)
 	}
 	return tasks
 }
