@@ -63,3 +63,15 @@ func listTasks(tasks []task) {
 		fmt.Println("You have no tasks!")
 	}
 }
+
+func removeTask(tasks []task, sernum int) []task {
+	i := sernum - 1
+	for j := range tasks {
+		if i == j {
+			tasks = append(tasks[:j], tasks[j+1:]...)
+		} else {
+			fmt.Printf("there is no task with number %v\n", sernum)
+		}
+	}
+	return tasks
+}
