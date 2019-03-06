@@ -20,12 +20,7 @@ func newTask(descr string) *task {
 	return t
 }
 
-func readTasksFromFile(filename string) []task {
-	b, err := ioutil.ReadFile(filename)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+func convertBytesToTasks(b []byte) []task {
 	var tasks []task
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
@@ -33,6 +28,14 @@ func readTasksFromFile(filename string) []task {
 		tasks = append(tasks, *t)
 	}
 	return tasks
+}
+
+func readTasksFromFile(filename string) []task {
+	b, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return convertBytesToTasks(b)
 }
 
 func listTasks(tasks []task) {
