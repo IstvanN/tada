@@ -3,9 +3,9 @@ package main
 import "testing"
 
 var tt = []task{
-	*newTask("test"),
-	*newTask("1"),
-	*newTask("2"),
+	newTask("test"),
+	newTask("1"),
+	newTask("2"),
 }
 
 var descriptions = []string{"test", "1", "2"}
