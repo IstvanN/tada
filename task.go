@@ -55,7 +55,6 @@ func readTasksFromFile(filename string) []task {
 }
 
 func listTasks(tasks []task) {
-	printHeader()
 	if len(tasks) > 0 && tasks[0].descr != "" {
 		for i, t := range tasks {
 			fmt.Printf("%v -  %v\n", i+1, t.descr)

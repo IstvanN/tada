@@ -12,6 +12,7 @@ var tasks []task
 
 func main() {
 	parseFlags()
+	printHeader()
 	if lFlag {
 		tasks = readTasksFromFile(datafile)
 		listTasks(tasks)
@@ -31,7 +32,6 @@ Tada - a CLI todo application
 }
 
 func showHelp() {
-	printHeader()
 	flag.PrintDefaults()
 	os.Exit(0)
 }
