@@ -2,14 +2,18 @@ package main
 
 import "testing"
 
-func TestNewTask(t *testing.T) {
-	expected := "testing"
-	task := newTask(expected)
+var tt = []task{
+	*newTask("test"),
+	*newTask("1"),
+	*newTask("2"),
+}
 
-	if task.descr != expected {
-		t.Errorf("expected: %v, actual: %v", expected, task.descr)
-	}
-	if task.done {
-		t.Errorf("expected: %v, actual: %v", expected, task.done)
+func TestNewTask(t *testing.T) {
+	expected := []string{"test", "1", "2"}
+	for i, tsk := range tt {
+		if tsk.descr != expected[i] && tsk.done != false {
+			t.Errorf("expected descr: %v expected done: %v, actual descr: %v, actual done: %v",
+				expected[i], false, tsk.descr, tsk.done)
+		}
 	}
 }
