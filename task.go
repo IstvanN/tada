@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
@@ -28,8 +29,14 @@ func readTasksFromFile(filename string) []task {
 	var tasks []task
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
-		tsk := newTask(expr)
-		tasks = append(tasks, *tsk)
+		t := newTask(expr)
+		tasks = append(tasks, *t)
 	}
 	return tasks
+}
+
+func listTasks(tasks []task) {
+	for i, t := range tasks {
+		fmt.Printf("%v -  %v\n", i+1, t.name)
+	}
 }
