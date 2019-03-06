@@ -53,3 +53,12 @@ func TestConvertBytesToTasks(t *testing.T) {
 		}
 	}
 }
+
+func RemoveTask(t *testing.T) {
+	newtt := removeTask(tt, 3)
+	for i, tsk := range newtt {
+		if tsk != tt[i] {
+			t.Errorf("expected: %v, actual: %v", tt[i], tsk)
+		}
+	}
+}
