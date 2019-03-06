@@ -8,13 +8,17 @@ import (
 
 const datafile = "data/data.csv"
 
+var tasks []task
+
 func main() {
 	parseFlags()
 	if lFlag {
-		tasks := readTasksFromFile(datafile)
+		tasks = readTasksFromFile(datafile)
 		listTasks(tasks)
 		return
 	}
+
+	showHelp()
 }
 
 func printHeader() {
