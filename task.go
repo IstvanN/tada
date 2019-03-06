@@ -20,6 +20,22 @@ func newTask(descr string) *task {
 	return t
 }
 
+func convertTasksToCSV(tasks []task) string {
+	var s []string
+	for _, t := range tasks {
+		s = append(s, t.descr)
+	}
+	return strings.Join(s, ",")
+}
+
+func writeTasksToFile(tasks []task, filename string) {
+	csv := convertTasksToCSV(tasks)
+	err := ioutil.WriteFile(filename, []byte(csv), 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 func convertBytesToTasks(b []byte) []task {
 	var tasks []task
 	s := strings.Split(string(b), ",")
