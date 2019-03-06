@@ -35,3 +35,21 @@ func TestConvertTasksToCSV(t *testing.T) {
 		t.Errorf("expected: %v but actual: %v", expected, actual)
 	}
 }
+
+func TestConvertBytesToTasks(t *testing.T) {
+	var csv string
+	for i, d := range descriptions {
+		if i != len(descriptions)-1 {
+			csv += d + ","
+		} else {
+			csv += d
+		}
+	}
+
+	actual := convertBytesToTasks([]byte(csv))
+	for i, tsk := range actual {
+		if tt[i] != tsk {
+			t.Errorf("expected: %v, actual:%v", tt[i], tsk)
+		}
+	}
+}
