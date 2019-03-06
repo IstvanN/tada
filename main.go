@@ -9,7 +9,7 @@ func main() {
 func printHeader() {
 	fmt.Println(
 		`
-Command Line Todo application
+Tada - a CLI todo application
 =============================
 
 `)
