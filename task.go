@@ -68,9 +68,9 @@ func removeTask(tasks []task, sernum int) []task {
 	i := sernum - 1
 	for j := range tasks {
 		if i == j {
-			tasks = append(tasks[:j], tasks[j+1:]...)
-		} else {
-			fmt.Printf("there is no task with number %v\n", sernum)
+			removed := tasks[i]
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			fmt.Printf("'%v' has been removed of the tasks\n", removed.descr)
 		}
 	}
 	return tasks
