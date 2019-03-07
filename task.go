@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -64,14 +65,18 @@ func listTasks(tasks []task) {
 	}
 }
 
-func removeTask(tasks []task, sernum int) []task {
+func removeTask(tasks []task, sernum int) ([]task, error) {
+	if sernum > len(tasks) {
+		err := errors.New("Can't delete task: index is out of bound")
+		return nil, err
+	}
 	i := sernum - 1
 	for j := range tasks {
 		if i == j {
 			removed := tasks[i]
 			tasks = append(tasks[:i], tasks[i+1:]...)
-			fmt.Printf("'%v' has been removed of the tasks\n", removed.descr)
+			fmt.Printf("'%v' has been removed from the tasks\n", removed.descr)
 		}
 	}
-	return tasks
+	return tasks, nil
 }
