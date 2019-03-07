@@ -26,6 +26,11 @@ func main() {
 		fmt.Printf("'%v' has been added to your todos!", t.descr)
 		return
 	}
+	if rFlag != 0 {
+		tasks = removeTask(tasks, rFlag)
+		writeTasksToFile(tasks, datafile)
+		return
+	}
 
 	showHelp()
 }
