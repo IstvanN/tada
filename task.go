@@ -45,8 +45,16 @@ func convertBytesToTasks(b []byte) []task {
 	var tasks []task
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
-		t := newTask(expr)
-		tasks = append(tasks, t)
+		if isFirstCharZero(expr) {
+			expr = string(expr[1:])
+			t := newTask(expr)
+			tasks = append(tasks, t)
+		} else {
+			expr = string(expr[1:])
+			t := newTask(expr)
+			t.done = true
+			tasks = append(tasks, t)
+		}
 	}
 	return tasks
 }
@@ -92,4 +100,8 @@ func removeTask(tasks []task, sernum int) ([]task, error) {
 		}
 	}
 	return tasks, nil
+}
+
+func isFirstCharZero(s string) bool {
+	return string(s[0]) == "0"
 }
