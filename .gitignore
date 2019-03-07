@@ -13,3 +13,6 @@
 
 # Data folder for the stored csv
 data/
+
+# VSCode folder
+.vscode/
