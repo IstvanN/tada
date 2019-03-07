@@ -65,6 +65,11 @@ func listTasks(tasks []task) {
 	}
 }
 
+func addTask(tasks []task, tdescr string) []task {
+	fmt.Printf("'%v' has been added to tasks\n", tdescr)
+	return append(tasks, newTask(tdescr))
+}
+
 func removeTask(tasks []task, sernum int) ([]task, error) {
 	if sernum > len(tasks) {
 		err := errors.New("Can't delete task: index is out of bound")
