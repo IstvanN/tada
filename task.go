@@ -24,7 +24,11 @@ func newTask(descr string) task {
 func convertTasksToCSV(tasks []task) string {
 	var s []string
 	for _, t := range tasks {
-		s = append(s, t.descr)
+		if t.done {
+			s = append(s, "1"+t.descr)
+		} else {
+			s = append(s, "0"+t.descr)
+		}
 	}
 	return strings.Join(s, ",")
 }
