@@ -117,3 +117,19 @@ func checkIfTaskIsDone(s string) (bool, error) {
 		return false, err
 	}
 }
+
+func markTaskDone(tasks []task, sernum int) ([]task, error) {
+	if sernum > len(tasks) {
+		err := errors.New("Can't delete task: index is out of bound")
+		return nil, err
+	}
+	i := sernum - 1
+	for j := range tasks {
+		if i == j {
+			tasks[i].done = true
+			fmt.Printf("'%v' had been marked as done\n", tasks[i].descr)
+		}
+	}
+
+	return tasks, nil
+}
