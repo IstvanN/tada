@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -27,7 +28,11 @@ func main() {
 		return
 	}
 	if rFlag != 0 {
-		tasks = removeTask(tasks, rFlag)
+		var err error
+		tasks, err = removeTask(tasks, rFlag)
+		if err != nil {
+			log.Fatal(err)
+		}
 		writeTasksToFile(tasks, datafile)
 		return
 	}
