@@ -45,14 +45,19 @@ func convertBytesToTasks(b []byte) []task {
 	var tasks []task
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
-		if isFirstCharZero(expr) {
+		done, err := checkIfTaskIsDone(expr)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if done {
 			expr = string(expr[1:])
 			t := newTask(expr)
+			t.done = true
 			tasks = append(tasks, t)
 		} else {
 			expr = string(expr[1:])
 			t := newTask(expr)
-			t.done = true
 			tasks = append(tasks, t)
 		}
 	}
@@ -102,6 +107,13 @@ func removeTask(tasks []task, sernum int) ([]task, error) {
 	return tasks, nil
 }
 
-func isFirstCharZero(s string) bool {
-	return string(s[0]) == "0"
+func checkIfTaskIsDone(s string) (bool, error) {
+	if string(s[0]) == "0" {
+		return false, nil
+	} else if string(s[0]) == "1" {
+		return true, nil
+	} else {
+		err := errors.New("Cannot identify if the following task is done or not: " + s)
+		return false, err
+	}
 }
