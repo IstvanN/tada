@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 var tt = []task{
 	newTask("test"),
@@ -8,7 +11,7 @@ var tt = []task{
 	newTask("2"),
 }
 
-var descriptions = []string{"test", "1", "2"}
+var descriptions = []string{"0test", "01", "02"}
 
 func TestNewTask(t *testing.T) {
 	for i, tsk := range tt {
@@ -65,5 +68,30 @@ func TestRemoveTask(t *testing.T) {
 	othertt, err := removeTask(tt, len(tt)+1)
 	if othertt != nil || err == nil {
 		t.Errorf("expected tasks: %v, actual tasks: %v, expected error, got %v", nil, othertt, nil)
+	}
+}
+
+func TestCheckIfTaskIsDone(t *testing.T) {
+	cases := []struct {
+		s       string
+		expDone bool
+		expErr  error
+	}{
+		{"0test", false, nil},
+		{"1test", true, nil},
+		{"test", false, errors.New("Cannot identify if the following task is done or not: test")},
+	}
+
+	for _, c := range cases {
+		ok, err := checkIfTaskIsDone(c.s)
+		if ok != c.expDone {
+			t.Errorf("checkIfTaskIsDone(%v) expected bool: %v, actual bool: %v", c.s, c.expDone, ok)
+		}
+
+		if err != nil {
+			if err == nil {
+				t.Errorf("checkIfTaskIsDone(%v) expected err: %v, actual err: %v", c.s, c.expErr, err)
+			}
+		}
 	}
 }
