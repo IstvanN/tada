@@ -120,7 +120,7 @@ func checkIfTaskIsDone(s string) (bool, error) {
 
 func markTaskDone(tasks []task, sernum int) ([]task, error) {
 	if sernum > len(tasks) {
-		err := errors.New("Can't delete task: index is out of bound")
+		err := errors.New("Can't complete task: index is out of bound")
 		return nil, err
 	}
 	i := sernum - 1
