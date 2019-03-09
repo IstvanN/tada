@@ -34,6 +34,14 @@ func main() {
 		writeTasksToFile(tasks, datafile)
 		return
 	}
+	if cFlag != 0 {
+		tasks, err = markTaskDone(tasks, cFlag)
+		if err != nil {
+			log.Fatal(err)
+		}
+		writeTasksToFile(tasks, datafile)
+		return
+	}
 
 	showHelp()
 }
