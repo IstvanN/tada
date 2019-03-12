@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const datafile = "data/data.csv"
+var datafile = os.Getenv("GOPATH") + "/src/github.com/IstvanN/tada/data/data.csv"
 
 var tasks []task
 var t task
