@@ -42,6 +42,9 @@ func writeTasksToFile(tasks []task, filename string) {
 }
 
 func convertBytesToTasks(b []byte) []task {
+	if len(b) == 0 {
+		return nil
+	}
 	var tasks []task
 	s := strings.Split(string(b), ",")
 	for _, expr := range s {
